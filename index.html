@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <title>Grand Cerf – Alerte</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <title>Grand Cerf - Code Rouge</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- Manifest -->
-  <link rel="manifest" href="manifest.json">
+  <!-- Manifest PWA -->
+  <link rel="manifest" href="manifest.json" />
+
+  <!-- Icône -->
+  <link rel="icon" href="logo.png" />
 
   <!-- Styles -->
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
 
   <!-- OneSignal SDK -->
   <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
@@ -19,39 +22,26 @@
     OneSignalDeferred.push(async function(OneSignal) {
       await OneSignal.init({
         appId: "92df196d-df7e-49bf-a9d5-ce548979b922",
+        // IMPORTANT : à ajuster plus tard si tu veux limiter à certains domaines
+        safari_web_id: null
       });
-    });
-
-    // 🔥 Forcer l’affichage du prompt d’abonnement
-    OneSignalDeferred.push(async function(OneSignal) {
-      try {
-        await OneSignal.showSlidedownPrompt();
-      } catch (e) {
-        console.error("Erreur prompt OneSignal :", e);
-      }
     });
   </script>
 </head>
 <body>
-  <header>
-    <h1>Grand Cerf – Alerte</h1>
-  </header>
+  <div class="container">
+    <h1>🚨 Grand Cerf - Code Rouge</h1>
 
-  <main>
-    <section>
-      <h2>Envoyer une alerte</h2>
-      <form id="alert-form">
-        <label for="message">Message d’alerte</label>
-        <textarea id="message" name="message" rows="3">Test accident enfant accueil</textarea>
-        <button type="submit">Envoyer l’alerte</button>
-      </form>
-    </section>
+    <label for="message">Message d'urgence</label>
+    <textarea id="message" placeholder="Piscine fermée immédiatement"></textarea>
 
-    <section>
-      <h2>Historique des alertes</h2>
-      <ul id="history"></ul>
-    </section>
-  </main>
+    <button id="btn-code-rouge">🔴 CODE ROUGE</button>
+
+    <div id="status"></div>
+
+    <h2>Historique</h2>
+    <ul id="historique"></ul>
+  </div>
 
   <script src="app.js"></script>
 </body>
