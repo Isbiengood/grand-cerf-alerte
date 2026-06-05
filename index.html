@@ -1,96 +1,37 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Grand Cerf - Code Rouge</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <!-- Manifest PWA -->
-  <link rel="manifest" href="manifest.json">
+  <link rel="manifest" href="manifest.json" />
 
   <!-- Icône -->
-  <link rel="icon" href="logo.png">
+  <link rel="icon" href="logo.png" />
 
-  <!-- Style -->
-  <link rel="stylesheet" href="style.css">
+  <!-- Styles -->
+  <link rel="stylesheet" href="style.css" />
 
-  <!-- OneSignal -->
+  <!-- OneSignal SDK -->
   <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
 
   <script>
     window.OneSignalDeferred = window.OneSignalDeferred || [];
-
     OneSignalDeferred.push(async function(OneSignal) {
-
       await OneSignal.init({
         appId: "92df196d-df7e-49bf-a9d5-ce548979b922"
       });
-
-      console.log("OneSignal initialisé");
-
-      setTimeout(async () => {
-
-        try {
-
-          const permission =
-            await OneSignal.Notifications.permission;
-
-          const optedIn =
-            await OneSignal.User.PushSubscription.optedIn;
-
-          const subId =
-            OneSignal.User.PushSubscription.id;
-
-          console.log("Permission =", permission);
-          console.log("OptedIn =", optedIn);
-          console.log("Subscription ID =", subId);
-
-          if (!optedIn) {
-
-            console.log("Demande d'abonnement");
-
-            await OneSignal.Notifications.requestPermission();
-
-            setTimeout(async () => {
-
-              console.log(
-                "Permission après demande =",
-                await OneSignal.Notifications.permission
-              );
-
-              console.log(
-                "OptedIn après demande =",
-                await OneSignal.User.PushSubscription.optedIn
-              );
-
-              console.log(
-                "Subscription ID après demande =",
-                OneSignal.User.PushSubscription.id
-              );
-
-            }, 3000);
-          }
-
-        } catch (e) {
-          console.error("Erreur OneSignal :", e);
-        }
-
-      }, 3000);
-
     });
   </script>
-
 </head>
 
 <body>
-
   <div class="container">
-
     <h1>🚨 Grand Cerf - Code Rouge</h1>
 
-    <label for="message">
-      Message d'urgence
-    </label>
+    <label for="message">Message d'urgence</label>
 
     <textarea
       id="message"
@@ -106,11 +47,8 @@
     <h2>Historique</h2>
 
     <ul id="historique"></ul>
-
   </div>
 
   <script src="app.js"></script>
-
 </body>
 </html>
-
