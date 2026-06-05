@@ -25,6 +25,16 @@
         // IMPORTANT : à ajuster plus tard si tu veux limiter à certains domaines
         safari_web_id: null
       });
+      console.log("OneSignal initialisé");
+
+const permission = await OneSignal.Notifications.permission;
+console.log("Permission :", permission);
+
+const optedIn = await OneSignal.User.PushSubscription.optedIn;
+console.log("Abonné :", optedIn);
+
+const subId = OneSignal.User.PushSubscription.id;
+console.log("Subscription ID :", subId);
     });
   </script>
 </head>
